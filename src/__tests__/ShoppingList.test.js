@@ -1,13 +1,7 @@
-import "whatwg-fetch";
 import "@testing-library/jest-dom";
-import {
-  render,
-  screen,
-  fireEvent,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
-import { resetData } from "../mocks/handlers";
-import { server } from "../mocks/server";
+import { render, screen, fireEvent, waitForElementToBeRemoved } from "@testing-library/react";
+import { resetData } from "../../mocks/handlers"; // Corrected import path
+import { server } from "../../mocks/server"; // Corrected import path
 import ShoppingList from "../components/ShoppingList";
 
 beforeAll(() => server.listen());
@@ -51,7 +45,7 @@ test("adds a new item to the list when the ItemForm is submitted", async () => {
   const desserts = await screen.findAllByText(/Dessert/);
   expect(desserts.length).toBe(dessertCount + 1);
 
-  // Rerender the component to ensure the item was persisted
+ 
   rerender(<ShoppingList />);
 
   const rerenderedIceCream = await screen.findByText(/Ice Cream/);
@@ -94,7 +88,7 @@ test("removes an item from the list when the delete button is clicked", async ()
 
   await waitForElementToBeRemoved(() => screen.queryByText(/Yogurt/));
 
-  // Rerender the component to ensure the item was persisted
+  
   rerender(<ShoppingList />);
 
   const rerenderedDeleteButtons = await screen.findAllByText(/Delete/);
